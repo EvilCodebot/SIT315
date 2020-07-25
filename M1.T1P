@@ -1,0 +1,29 @@
+float sensor=0;
+float celsius=0;
+float voltage=0;
+
+void setup()
+{
+  pinMode(13, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{ 
+  sensor=analogRead(1);
+  voltage=sensor*5000/1024;
+  voltage=voltage-500;
+  celsius=voltage/10;
+  
+  Serial.print("The current temperature is ");
+  Serial.println(celsius);
+  
+  // turn light on for 2 seconds if temp is above 30 
+  if(celsius > 30)
+  {
+    digitalWrite(13, HIGH);
+    delay(2000);
+    digitalWrite(13, LOW);
+  }
+  delay(5000);
+}
